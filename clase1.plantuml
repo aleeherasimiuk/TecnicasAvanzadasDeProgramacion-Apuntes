@@ -1,0 +1,36 @@
+@startuml clase1
+
+
+class Defensor <<(M, #FF7700)>>{
+  potencial_ofensivo
+  atacar(un_defensor)
+}
+
+
+class Atacante <<(M, #FF7700)>>{
+  potencial_defensivo
+  energia
+  sufrir_daño(daño)
+}
+
+Guerrero -u-|> Defensor
+Guerrero -u-|> Atacante
+class Guerrero{}
+
+Muralla -u-|> Defensor
+class Muralla{}
+
+Misil -u-|> Atacante
+
+Espadachin -u-|> Guerrero
+Espadachin -> Espada
+class Espadachin{
+  espada
+  potencial_ofensivo()
+}
+
+class Espada{
+  potencial_ofensivo
+}
+
+@enduml
