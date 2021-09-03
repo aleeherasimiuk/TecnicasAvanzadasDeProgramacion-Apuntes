@@ -1,0 +1,90 @@
+@startuml conflict
+
+class A {
+  m()
+}
+
+class B extends A {
+  m()
+}
+
+class C extends A {
+  m()
+}
+
+class D {}
+
+D -u-|> C
+D -u-|> B
+
+
+@enduml
+
+@startuml conflictReposar
+
+class Atacante<<(M, #FF7700)>>{
+  atacar(otro)
+  potencial_ofensivo()
+  reposar()
+}
+
+class Defensor<<(M, #FF7700)>>{
+  recibir_daño(daño)
+  potencial_defensivo()
+  reposar()
+}
+
+@enduml
+
+@startuml unidad
+
+
+class Atacante<<(M, #FF7700)>>{
+  reposar()
+}
+
+class Defensor<<(M, #FF7700)>>{
+  reposar()
+}
+
+class Misil extends Atacante{}
+class Kamikaze extends Atacante, Defensor{}
+class Guerrero extends Atacante, Defensor{}
+class Muralla extends Defensor{}
+
+Misil -d-|> Unidad
+Kamikaze -d-|> Unidad
+Guerrero -d-|> Unidad
+Muralla -d-|> Unidad
+
+class Unidad<<(M, #FF7700)>>{
+  reposar()
+}
+
+@enduml
+
+@startuml unidad2
+
+
+class Atacante<<(M, #FF7700)>>{
+  reposar()
+}
+
+class Defensor<<(M, #FF7700)>>{
+  reposar()
+}
+
+class Misil extends Atacante{}
+class Kamikaze extends Atacante, Defensor{}
+class Guerrero extends Atacante, Defensor{}
+class Muralla extends Defensor{}
+
+Atacante -u-|> Unidad
+Defensor -u-|> Unidad
+
+class Unidad<<(M, #FF7700)>>{
+  reposar()
+}
+
+@enduml
+
