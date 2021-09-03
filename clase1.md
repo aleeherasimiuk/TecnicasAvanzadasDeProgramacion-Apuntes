@@ -200,7 +200,7 @@ end
 ```
 <br>
 <div align="center">
-  <img src="out/clase1/clase1.png" alt="">
+  <img src="diagrams/clase1/clase1.png" alt="">
 </div>
 <br>
 
