@@ -9,3 +9,7 @@
 [Clase 2 - Mixins & Traits](clase2.md)
 - [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_2/)
 - [Video de Clase](https://www.youtube.com/watch?v=KtldhSAvuZE&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=5)
+
+[Clase 3 - Metaprogramación en Ruby](clase3.md)
+- [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_3/)
+- [Video de Clase](https://www.youtube.com/watch?v=pWo9L0aM9sE&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=3)
