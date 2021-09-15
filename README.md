@@ -13,3 +13,7 @@
 [Clase 3 - Metaprogramación en Ruby](clase3.md)
 - [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_3/)
 - [Video de Clase](https://www.youtube.com/watch?v=pWo9L0aM9sE&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=3)
+
+[Clase 4 - Recepción dinámica de Mensajes y Bloques](clase4.md)
+- [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_4/)
+- [Video de Clase](https://www.youtube.com/watch?v=Rx9hopSuOSs&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=5)
