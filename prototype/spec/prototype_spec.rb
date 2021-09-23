@@ -1,29 +1,65 @@
 class PrototypeObject
 
-  def initialize(properties = {})
-    @properties = properties
-    @properties.each do |property_name, value|
-      set_property(property_name, value)
-    end
+  def initialize(prototype = nil)
+    @properties = {}
+    @prototype = prototype
   end
 
   def set_property(property_name, value)
     @properties = @properties.merge(property_name => value) ## Piso los valores, genera un dict nuevo
-    
-    case value
-    when Proc
-      define_singleton_method(property_name, &value)
-    else
-      define_singleton_method(property_name) {get_property(property_name)} 
-    end
   end
 
   def get_property(property_name)
-    @properties.fetch(property_name) {raise PropertyNotFoundError.new}
+    @properties.fetch(property_name) do 
+      if @prototype.nil?
+        raise PropertyNotFoundError.new
+      end
+      @prototype.get_property(property_name)
+    end
   end
 
   def copy
-    self.class.new(@properties)
+    self.class.new(self)
+  end
+
+  private
+
+  def method_missing(method_name, *args, &block)
+    if respond_to_missing?(method_name)
+
+      possible_property_name = possible_property_name(method_name)
+
+      if is_setter? method_name
+        set_property(possible_property_name, args.first)
+      else
+        property = get_property(method_name)
+        case property
+        when Proc
+          instance_exec(*args, &property)
+        else
+          property
+        end 
+      end
+    else
+      super
+    end
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    possible_property_name = possible_property_name(method_name)
+    @properties.has_key?(possible_property_name.to_sym) || @prototype.respond_to?(method_name.to_sym) || super
+  end
+
+  def is_setter?(method_name)
+    method_name.to_s.end_with?('=')
+  end
+
+  def possible_property_name(method_name)
+    if is_setter? method_name
+      method_name.to_s.chomp("=").to_sym
+    else
+      method_name.to_sym
+    end
   end
 end
 
@@ -117,6 +153,42 @@ describe 'Prototyped Objects' do
     expect(guerrero.energia).to eq 100
     expect(otro_guerrero.energia).to eq 150
 
+  end
+
+  it 'should return the property of original object if not defined' do
+    
+    guerrero = PrototypeObject.new
+
+    otro_guerrero = guerrero.copy
+
+    guerrero.set_property(:energia, 150)
+
+    expect(guerrero.energia).to eq 150
+    expect(otro_guerrero.energia).to eq 150
+
+  end
+
+  it 'should use right self' do
+    guerrero = PrototypeObject.new
+
+    
+    guerrero.set_property(:nombre, 'Pepe')
+    guerrero.set_property(:saludar, -> { "Hola!, soy #{nombre}" })
+    
+    otro_guerrero = guerrero.copy
+    otro_guerrero.set_property(:nombre, 'Juan')
+
+
+    expect(guerrero.saludar).to eq "Hola!, soy Pepe"
+    expect(otro_guerrero.saludar).to eq "Hola!, soy Juan"
+  end
+
+  it 'should define method to set property' do
+    guerrero = PrototypeObject.new
+    guerrero.set_property(:nombre, 'Jose')
+    guerrero.nombre = 'Pepe'
+    expect(guerrero.respond_to?(:nombre=)).to be true
+    expect(guerrero.nombre).to eq 'Pepe'
   end
 
 end
