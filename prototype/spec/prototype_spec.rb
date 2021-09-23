@@ -13,11 +13,15 @@ class PrototypeObject
   end
 
   def method_missing(method_name, *params, &block)
-    if @properties.has_key?(method_name)
+    if respond_to_missing?(method_name)
       get_property(method_name)
     else
       super
     end
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    @properties.has_key?(method_name) || super
   end
 end
 
@@ -48,6 +52,7 @@ describe 'Prototyped Objects' do
     guerrero.set_property(:energia, 100)
 
     expect(guerrero.energia).to eq 100
+    expect(guerrero.respond_to?(:energia)).to be true
 
   end
 
@@ -56,6 +61,7 @@ describe 'Prototyped Objects' do
     guerrero = PrototypeObject.new
 
     expect{ guerrero.energia }.to raise_error(NoMethodError)
+    expect(guerrero.respond_to?(:energia)).to be false
 
   end
 
