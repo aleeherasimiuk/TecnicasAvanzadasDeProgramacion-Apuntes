@@ -6,13 +6,13 @@ class PrototypeObject
 
   def set_property(property_name, value)
     @properties[property_name] = value
-    define_singleton_method(property_name) do
+    define_singleton_method(property_name) do |*params|
 
       property = get_property(property_name)
 
       case property
       when Proc ## Quizá sea conveniente una solución que acepte cualquier objeto que se le pueda hacer .call
-        instance_eval(&property)
+        instance_exec(*params, &property)
       else
         property
       end
@@ -75,10 +75,21 @@ describe 'Prototyped Objects' do
     
     guerrero = PrototypeObject.new
     guerrero.set_property(:nombre, 'Pepe')
-    guerrero.set_property(:saludar, proc { "Hola!, soy #{nombre}" })
+    guerrero.set_property(:saludar, -> { "Hola!, soy #{nombre}" })
 
     expect(guerrero.saludar).to eq "Hola!, soy Pepe"
 
   end
+
+  it 'should can access to object properties and pass arguments' do
+  
+    guerrero = PrototypeObject.new
+    guerrero.set_property(:nombre, 'Pepe')
+    guerrero.set_property(:saludar, proc { |a| "Hola #{a}!, soy #{nombre}" })
+
+    expect(guerrero.saludar('José')).to eq "Hola José!, soy Pepe"
+  
+  end
+
 
 end
