@@ -12,7 +12,7 @@ class PrototypeObject
 
       case property
       when Proc ## Quizá sea conveniente una solución que acepte cualquier objeto que se le pueda hacer .call
-        property.call
+        instance_eval(&property)
       else
         property
       end
@@ -66,10 +66,19 @@ describe 'Prototyped Objects' do
 
   it 'should call proc/lambda on set property' do
     guerrero = PrototypeObject.new
-    guerrero.set_property(:saludar, -> {"Hola!"})
+    guerrero.set_property(:saludar, proc {"Hola!"})
 
     expect(guerrero.saludar).to eq "Hola!"
   end
 
+  it 'should can access to object properties' do
+    
+    guerrero = PrototypeObject.new
+    guerrero.set_property(:nombre, 'Pepe')
+    guerrero.set_property(:saludar, proc { "Hola!, soy #{nombre}" })
+
+    expect(guerrero.saludar).to eq "Hola!, soy Pepe"
+
+  end
 
 end
