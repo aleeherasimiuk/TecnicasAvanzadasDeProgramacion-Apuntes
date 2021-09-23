@@ -6,22 +6,11 @@ class PrototypeObject
 
   def set_property(property_name, value)
     @properties[property_name] = value
+    define_singleton_method(property_name) {get_property(property_name)}
   end
 
   def get_property(property_name)
     @properties.fetch(property_name) {raise PropertyNotFoundError.new}
-  end
-
-  def method_missing(method_name, *params, &block)
-    if respond_to_missing?(method_name)
-      get_property(method_name)
-    else
-      super
-    end
-  end
-
-  def respond_to_missing?(method_name, include_private = false)
-    @properties.has_key?(method_name) || super
   end
 end
 
