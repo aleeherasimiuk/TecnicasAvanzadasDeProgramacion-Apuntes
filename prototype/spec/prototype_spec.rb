@@ -6,7 +6,17 @@ class PrototypeObject
 
   def set_property(property_name, value)
     @properties[property_name] = value
-    define_singleton_method(property_name) {get_property(property_name)}
+    define_singleton_method(property_name) do
+
+      property = get_property(property_name)
+
+      case property
+      when Proc ## Quizá sea conveniente una solución que acepte cualquier objeto que se le pueda hacer .call
+        property.call
+      else
+        property
+      end
+    end
   end
 
   def get_property(property_name)
@@ -53,5 +63,13 @@ describe 'Prototyped Objects' do
     expect(guerrero.respond_to?(:energia)).to be false
 
   end
+
+  it 'should call proc/lambda on set property' do
+    guerrero = PrototypeObject.new
+    guerrero.set_property(:saludar, -> {"Hola!"})
+
+    expect(guerrero.saludar).to eq "Hola!"
+  end
+
 
 end
