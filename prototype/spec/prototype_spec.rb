@@ -1,11 +1,14 @@
 class PrototypeObject
 
-  def initialize()
-    @properties = {}
+  def initialize(properties = {})
+    @properties = properties
+    @properties.each do |property_name, value|
+      set_property(property_name, value)
+    end
   end
 
   def set_property(property_name, value)
-    @properties[property_name] = value
+    @properties = @properties.merge(property_name => value) ## Piso los valores, genera un dict nuevo
     
     case value
     when Proc
@@ -17,6 +20,10 @@ class PrototypeObject
 
   def get_property(property_name)
     @properties.fetch(property_name) {raise PropertyNotFoundError.new}
+  end
+
+  def copy
+    self.class.new(@properties)
   end
 end
 
@@ -67,7 +74,7 @@ describe 'Prototyped Objects' do
     expect(guerrero.saludar).to eq "Hola!"
   end
 
-  it 'should can access to object properties' do
+  it 'should access to object properties' do
     
     guerrero = PrototypeObject.new
     guerrero.set_property(:nombre, 'Pepe')
@@ -77,7 +84,7 @@ describe 'Prototyped Objects' do
 
   end
 
-  it 'should can access to object properties and pass arguments' do
+  it 'should access to object properties and pass arguments' do
   
     guerrero = PrototypeObject.new
     guerrero.set_property(:nombre, 'Pepe')
@@ -87,5 +94,29 @@ describe 'Prototyped Objects' do
   
   end
 
+  it 'should copy object with properties' do
+
+    guerrero = PrototypeObject.new
+    guerrero.set_property(:energia, 100)
+
+    otro_guerrero = guerrero.copy
+
+    expect(otro_guerrero.energia).to eq 100
+
+  end
+
+
+  it 'should copy object with properties but they are different objects' do
+
+    guerrero = PrototypeObject.new
+    guerrero.set_property(:energia, 100)
+
+    otro_guerrero = guerrero.copy
+    otro_guerrero.set_property(:energia, 150)
+
+    expect(guerrero.energia).to eq 100
+    expect(otro_guerrero.energia).to eq 150
+
+  end
 
 end
