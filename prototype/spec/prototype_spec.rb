@@ -9,8 +9,11 @@ class PrototypeObject
   end
 
   def get_property(property_name)
-    @properties[property_name]
+    @properties.fetch(property_name) {raise PropertyNotFoundError.new}
   end
+end
+
+class PropertyNotFoundError < StandardError
 end
 
 describe '' do
@@ -20,6 +23,14 @@ describe '' do
     guerrero.set_property(:energia, 100)
 
     expect(guerrero.get_property(:energia)).to eq 100
+
+  end
+
+  it '' do
+
+    guerrero = PrototypeObject.new
+
+    expect{guerrero.get_property(:energia)}.to raise_error(PropertyNotFoundError)
 
   end
 end
