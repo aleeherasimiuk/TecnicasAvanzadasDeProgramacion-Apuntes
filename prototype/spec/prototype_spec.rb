@@ -6,16 +6,12 @@ class PrototypeObject
 
   def set_property(property_name, value)
     @properties[property_name] = value
-    define_singleton_method(property_name) do |*params|
-
-      property = get_property(property_name)
-
-      case property
-      when Proc ## Quizá sea conveniente una solución que acepte cualquier objeto que se le pueda hacer .call
-        instance_exec(*params, &property)
-      else
-        property
-      end
+    
+    case value
+    when Proc
+      define_singleton_method(property_name, &value)
+    else
+      define_singleton_method(property_name) {get_property(property_name)} 
     end
   end
 
