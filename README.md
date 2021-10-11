@@ -17,3 +17,17 @@
 [Clase 4 - Recepción dinámica de Mensajes y Bloques](clase4.md)
 - [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_4/)
 - [Video de Clase](https://www.youtube.com/watch?v=Rx9hopSuOSs&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=5)
+
+[Clase 5 - Ejercicio Prototype](clase5.md)
+- [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_5/)
+- [Video de Clase](https://www.youtube.com/watch?v=njQYvOv1HGI&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=5)
+
+[Clase 6 - Programación Híbrido: Funcional-Objetos](clase6.md)
+- [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_6/)
+- [Video de Clase](https://www.youtube.com/watch?v=0SuiY3ZFZeM&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=8)
+
+[Clase 7 - Tipos Compuestos y Varianza](clase7.md)
+- [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_7/)
+- [Video de Clase](https://www.youtube.com/watch?v=KEu6LUZj0lQ&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=8)
+
+
