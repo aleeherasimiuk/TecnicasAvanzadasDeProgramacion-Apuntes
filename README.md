@@ -30,4 +30,9 @@
 - [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_7/)
 - [Video de Clase](https://www.youtube.com/watch?v=KEu6LUZj0lQ&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=8)
 
+[Clase 8 - Intro a Objeto-Funcional](clase8.md)
+- [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_8/)
+- [Video de Clase](https://www.youtube.com/watch?v=kmDJiu4IAoM&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=9)
+
+
 
