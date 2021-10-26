@@ -34,5 +34,9 @@
 - [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_8/)
 - [Video de Clase](https://www.youtube.com/watch?v=kmDJiu4IAoM&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=9)
 
+[Clase 9 - Abstracción y Mónadas](clase9.md)
+- [Script de Clase](https://tadp-utn-frba.github.io/scripts/clase_9/)
+- [Video de Clase](https://www.youtube.com/watch?v=tcTOM7NfbMY&list=PLUszDKkk7zb043oiSVCm16PrTNZQpG7fC&index=10)
+
 
 
